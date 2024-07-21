@@ -3,6 +3,18 @@ import { PasswordValidator } from "./components/PasswordValidator";
 
 export const Intro = () => {
   const [btnLabel, setBtnLabel] = useState("Click me");
+  const [isChecked, setisChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setisChecked(!isChecked);
+  };
+
+  let label = "nie zaznaczony";
+
+  if (isChecked) {
+    label = "zaznaczony";
+  }
+
   return (
     <>
       <article>
@@ -18,9 +30,15 @@ export const Intro = () => {
         </button>
       </article>
       <article>
-        <input type="checkbox" name="" id="" />
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+          name=""
+          id=""
+        />
         {/* Niech słowa "zaznaczony/nie zaznaczony" wyświetlają się w zależności od stanu checkboxa obok */}
-        <span>Status checkboxa: zaznaczony/nie zaznaczony</span>
+        <span>{label}</span>
       </article>
       <PasswordValidator />
     </>

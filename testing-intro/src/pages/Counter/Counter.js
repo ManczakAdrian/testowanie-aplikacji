@@ -7,19 +7,32 @@ export const Counter = () => {
     <>
       <article>
         <h1>Counter</h1>
-        <button onClick={() => setCounter((p) => p + 1)}>+1</button>
-        <input type="text" readOnly value={counter} />
-        <button onClick={() => setCounter((p) => p - 1)}>-1</button>
+        <button data-cy="increaseBtn" onClick={() => setCounter((p) => p + 1)}>
+          +1
+        </button>
+        <input type="text" data-cy="counterOutput" readOnly value={counter} />
+        <button data-cy="decreaseBtn" onClick={() => setCounter((p) => p - 1)}>
+          -1
+        </button>
         <button
+          data-cy="saveBtn"
           onClick={() => setScores((prevScores) => [...prevScores, counter])}
         >
           Save score
         </button>
-        <button>Reset counter value</button>
+        <button
+          data-cy="resetBtn"
+          onClick={() => {
+            setCounter(0);
+            setScores([]);
+          }}
+        >
+          Reset counter value
+        </button>
       </article>
       <article>
         {scores.length === 0 ? (
-          <p>No scores yet</p>
+          <p data-cy="emptyState">No scores yet</p>
         ) : (
           <ul>
             {scores.map((score, index) => (

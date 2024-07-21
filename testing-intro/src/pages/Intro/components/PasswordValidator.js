@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { validatePassword } from "../utils/validatePassword";
 
 export const PasswordValidator = () => {
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleValidateClick = () => {
+    const msg = validatePassword(password);
+    setMessage(msg);
+  };
+
   return (
     <article>
       <p>Password validator</p>
-      <input type="password" />
-      <p>Hasło jest za długie max 8 znaków</p>
-      <p>Hasło jest za krótkie min 3 znaki</p>
-      <p>Hasło powinno zawierać jeden ze znaków specjalnych ! @ # $ %</p>
-      <p>Hasło jest OK</p>
-      <button>Validate</button>
+      <input
+        type="password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+      />
+      <p>{message}</p>
+      <button onClick={handleValidateClick}>Validate</button>
     </article>
   );
 };
